@@ -1,20 +1,33 @@
 <template>
-  <h1> {{title}} </h1>
+  <div>
+    <h1>{{ title }}</h1>
+    <button @click="start" :disabled="isPlaying">Play</button>
+    <Block v-if="isPlaying" :delay="delay"/>
+  </div>   
 </template>
 
 <script>
 
+import Block from "./components/Block.vue"
+
 export default {
-  name: 'App',
+  name: "App",
+  components: { Block },
+
   data() {
     return {
-      title: "Reaction Timer Game"
-    }
+      title: "Reaction Timer Game",
+      isPlaying: false,
+      delay: null,
+    };
   },
-  components: {
-    
-  }
-}
+  methods: {
+    start() {
+      this.isPlaying = true
+      this.delay = 2000 + Math.random() * 5000
+    },
+  },
+};
 </script>
 
 <style>
